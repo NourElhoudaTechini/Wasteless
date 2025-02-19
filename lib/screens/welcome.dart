@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wasteless/components/button.dart';
 import 'package:wasteless/screens/login.dart';
 import 'package:wasteless/screens/register.dart';
-import 'package:wasteless/styles/color.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -96,13 +95,13 @@ class WelcomeScreen extends StatelessWidget {
                       },
                       isFilled: false,
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 12),
                     Text(
                       'By logging in or registering, you agree to our \nTerms of Service and Privacy Policy',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white70,
+                        fontSize: 10,
+                        color: Colors.green,
                       ),
                     ),
                   ],

@@ -44,6 +44,10 @@ class LoginScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 minimumSize: Size(double.infinity, 50),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               icon: Icon(Icons.facebook, color: Colors.white),
               label: Text('Login with FACEBOOK',
@@ -54,6 +58,10 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {},
               style: OutlinedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               icon: Image.asset('assets/google_logo.png', height: 15),
               label: Text('Login with GOOGLE',
