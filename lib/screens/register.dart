@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/components/button.dart';
 import 'package:wasteless/screens/welcome.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -99,14 +100,7 @@ class RegisterScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                minimumSize: Size(double.infinity, 50),
-              ),
-              child: Text('Sign Up', style: TextStyle(color: Colors.white)),
-            ),
+            CustomButton(text: 'Sign Up', onPressed: () {}),
           ],
         ),
       ),

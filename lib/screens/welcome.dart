@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/components/button.dart';
 import 'package:wasteless/screens/login.dart';
 import 'package:wasteless/screens/register.dart';
+import 'package:wasteless/styles/color.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -11,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.green.shade600, Colors.green.shade300],
+            colors: [primary, Colors.green.shade300],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -53,25 +55,19 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
                 children: [
-                  ElevatedButton(
+                  CustomButton(
+                    text: 'Sign in',
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.green.shade700,
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Sign In'),
+                    isFilled: true,
                   ),
                   SizedBox(height: 10),
-                  OutlinedButton(
+                  CustomButton(
+                    text: 'Sign up',
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -79,15 +75,7 @@ class WelcomeScreen extends StatelessWidget {
                             builder: (context) => RegisterScreen()),
                       );
                     },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: BorderSide(color: Colors.white),
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Sign Up'),
+                    isFilled: false,
                   ),
                   SizedBox(height: 10),
                   Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/components/button.dart';
 import 'package:wasteless/screens/register.dart';
 import 'package:wasteless/screens/welcome.dart';
 
@@ -76,14 +77,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                minimumSize: Size(double.infinity, 50),
-              ),
-              child: Text('Sign In', style: TextStyle(color: Colors.white)),
-            ),
+            CustomButton(text: 'Sign In', onPressed: () {}),
             SizedBox(height: 10),
             TextButton(
               onPressed: () {},
