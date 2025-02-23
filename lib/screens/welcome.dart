@@ -17,13 +17,13 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             children: [
               ClipPath(
+                clipper: CustomClipPath(
+                  context: context,
+                ),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   color: Colors.green,
-                ),
-                clipper: CustomClipPath(
-                  context: context,
                 ),
               ),
               Container(
@@ -119,6 +119,7 @@ class WelcomeScreen extends StatelessWidget {
 class CustomClipPath extends CustomClipper<Path> {
   final radius = 10.0;
 
+  // ignore: prefer_typing_uninitialized_variables
   final context;
 
   const CustomClipPath({

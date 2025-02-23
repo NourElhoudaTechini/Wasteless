@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasteless/screens/home.dart';
-import 'package:wasteless/screens/login.dart';
-import 'package:wasteless/screens/welcome.dart';
+import 'package:wasteless/screens/about.dart';
+import 'package:wasteless/screens/account.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +19,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
           useMaterial3: true,
         ),
-        home: WelcomeScreen());
+        home: AboutMeScreen());
   }
 }

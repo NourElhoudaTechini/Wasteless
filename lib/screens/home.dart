@@ -3,14 +3,51 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'package:wasteless/screens/register.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Navigation logic (Replace with actual navigation)
+    List<Widget> pages = [
+      HomeScreen(),
+      // Replace with actual MapScreen(),
+      RegisterScreen(),
+      // Replace with actual RecyclingScreen(),
+      Container(color: Colors.green),
+      // Replace with actual EventsScreen(),
+      Container(color: Colors.red),
+      // Replace with actual AccountScreen(),
+      Container(color: Colors.orange),
+    ];
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => pages[index]),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      bottomNavigationBar: CustomBottomNavBar(),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -28,14 +65,14 @@ class HomeScreen extends StatelessWidget {
     return Stack(
       children: [
         ClipPath(
-          clipper: BottomCutClipper(), // Custom shape clipper
+          clipper: BottomCutClipper(),
           child: Container(
             width: double.infinity,
             height: 350,
             decoration: BoxDecoration(
               color: Colors.green,
               image: DecorationImage(
-                image: AssetImage("assets/forest.png"), // Add your image here
+                image: AssetImage("assets/forest.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -106,7 +143,7 @@ class HomeScreen extends StatelessWidget {
             Image.asset("assets/money.png", width: 30),
             SizedBox(width: 5),
             Text(
-              "320 Wastless Points",
+              "320 Wasteless Points",
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.green[700],
@@ -124,7 +161,6 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         children: [
-          // First row with 3 items
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -134,14 +170,13 @@ class HomeScreen extends StatelessWidget {
               _buildActionCard(Icons.event, "Events", Colors.blue[300]!),
             ],
           ),
-          const SizedBox(height: 15), // Spacing between rows
-          // Second row with 2 items centered
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildActionCard(
                   Icons.emoji_events, "Ranking", Colors.amber[300]!),
-              const SizedBox(width: 15), // Space between the two items
+              const SizedBox(width: 15),
               _buildActionCard(
                   Icons.qr_code, "Object Detection", Colors.grey[400]!),
             ],
@@ -187,6 +222,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomBottomNavBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const CustomBottomNavBar(
+      {super.key, required this.currentIndex, required this.onTap});
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -194,15 +235,11 @@ class CustomBottomNavBar extends StatelessWidget {
       selectedItemColor: Colors.green[700],
       unselectedItemColor: Colors.grey[500],
       showUnselectedLabels: true,
+      currentIndex: currentIndex,
+      onTap: onTap,
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(LucideIcons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(LucideIcons.map),
-          label: 'Map',
-        ),
+        BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(LucideIcons.map), label: 'Map'),
         BottomNavigationBarItem(
           icon: CircleAvatar(
             backgroundColor: Colors.green,
@@ -211,13 +248,8 @@ class CustomBottomNavBar extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LucideIcons.trophy),
-          label: 'Ranking',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(LucideIcons.user),
-          label: 'Account',
-        ),
+            icon: Icon(LucideIcons.calendar), label: 'Events'),
+        BottomNavigationBarItem(icon: Icon(LucideIcons.user), label: 'Account'),
       ],
     );
   }
@@ -227,17 +259,16 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  File? _image; // Variable to store selected image
+  File? _image;
 
-  // Function to pick image from gallery
   Future<void> _pickImage() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -247,19 +278,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: _pickImage, // Open gallery when tapped
-        child: CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.grey[300], // Default background color
-          backgroundImage:
-              _image != null ? FileImage(_image!) : null, // Show selected image
-          child: _image == null
-              ? Icon(Icons.add_a_photo,
-                  size: 20, color: Colors.white) // Show icon if no image
-              : null,
-        ),
+    return GestureDetector(
+      onTap: _pickImage,
+      child: CircleAvatar(
+        radius: 30,
+        backgroundColor: Colors.grey[300],
+        backgroundImage: _image != null ? FileImage(_image!) : null,
+        child: _image == null
+            ? Icon(Icons.add_a_photo, size: 20, color: Colors.white)
+            : null,
       ),
     );
   }
