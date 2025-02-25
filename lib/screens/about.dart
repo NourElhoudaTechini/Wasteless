@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wasteless/components/button.dart';
+import 'package:wasteless/screens/account.dart';
 
 class AboutMeScreen extends StatefulWidget {
   const AboutMeScreen({super.key});
@@ -15,14 +17,17 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade100, // Light green background
+      backgroundColor: Colors.grey.shade100, // Light green background
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
           },
         ),
         title: Text(
@@ -38,7 +43,9 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20),
               _buildSectionTitle("Personal Details"),
+              SizedBox(height: 20),
               _buildTextField(Icons.person_outline, "Nour Techini"),
               _buildTextField(Icons.email_outlined, "nourtechini@gmail.com"),
               _buildTextField(Icons.phone_outlined, "+216 20 937 787"),
@@ -46,6 +53,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
               const SizedBox(height: 20),
 
               _buildSectionTitle("Change Password"),
+              SizedBox(height: 20),
               _buildPasswordField("Current password", _obscurePassword, () {
                 setState(() {
                   _obscurePassword = !_obscurePassword;
@@ -63,24 +71,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
               // Save Settings Button
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  onPressed: () {
-                    // Add functionality here
-                  },
-                  child: Text(
-                    "Save Settings",
-                    style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
+                child: CustomButton(text: "Save Settings", onPressed: () {}),
               ),
             ],
           ),

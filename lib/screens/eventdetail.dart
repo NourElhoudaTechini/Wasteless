@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/screens/events.dart';
 
 class EventDetailPage extends StatelessWidget {
   const EventDetailPage({super.key});
@@ -11,7 +12,12 @@ class EventDetailPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventsPage()),
+            );
+          },
         ),
         title: const Text(
           'Event',
@@ -29,7 +35,7 @@ class EventDetailPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -102,7 +108,7 @@ class EventDetailPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),

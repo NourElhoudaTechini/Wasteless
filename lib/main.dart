@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Wasteless',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+          fontFamily: 'Poppins',
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey.shade100),
           primarySwatch: Colors.green,
           useMaterial3: true,
         ),

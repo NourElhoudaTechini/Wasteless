@@ -7,30 +7,46 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade100, // Light green background
+      backgroundColor: Colors.grey.shade100, // Light green background
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 20),
-
-              // Profile Image
+              Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+              ),
               Stack(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.topCenter,
                 children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://via.placeholder.com/150'), // Replace with actual image
-                  ),
                   Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
                       color: Colors.white,
-                      shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.camera_alt,
-                        color: Colors.green, size: 20),
+                  ),
+                  // Profile Image
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      const CircleAvatar(
+                          radius: 60,
+                          backgroundImage: AssetImage(
+                              "assets/me.jpeg") // Replace with actual image
+                          ),
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.camera_alt,
+                            color: Colors.green, size: 20),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -48,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                 style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
 
               // Wasteless Points
               Text(
@@ -59,26 +75,55 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.green),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
               // Settings Section
               _buildSectionTitle("Settings"),
-              _buildListTile(Icons.person_outline, "About me"),
-              _buildListTile(Icons.favorite_border, "My Favorites"),
-              _buildListTile(Icons.location_on_outlined, "My Address"),
-              _buildListTile(Icons.sync_alt, "Exchange Wasteless Points"),
-              _buildListTile(Icons.notifications_none, "Notifications"),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: SizedBox(
+                  child: Column(
+                    children: [
+                      _buildListTile(Icons.person_outline, "About me"),
+                      _buildListTile(Icons.favorite_border, "My Favorites"),
+                      _buildListTile(Icons.location_on_outlined, "My Address"),
+                      _buildListTile(
+                          Icons.sync_alt, "Exchange Wasteless Points"),
+                      _buildListTile(Icons.notifications_none, "Notifications"),
+                    ],
+                  ),
+                ),
+              ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: 20),
 
               // Other Section
               _buildSectionTitle("Other"),
-              _buildListTile(Icons.info_outline, "Version",
-                  trailing: const Text("1.0.0",
-                      style: TextStyle(color: Colors.grey))),
-              _buildListTile(Icons.star_border, "Rate us"),
-              _buildListTile(Icons.logout, "Sign out",
-                  iconColor: Colors.red, textColor: Colors.red),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    _buildListTile(Icons.info_outline, "Version",
+                        trailing: const Text("1.0.0",
+                            style: TextStyle(color: Colors.grey))),
+                    _buildListTile(Icons.star_border, "Rate us"),
+                    ListTile(
+                      leading: Icon(Icons.logout, color: Colors.red),
+                      title: Text("Sign out",
+                          style: GoogleFonts.poppins(color: Colors.red)),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -104,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
       Color iconColor = Colors.black,
       Color textColor = Colors.black}) {
     return ListTile(
-      leading: Icon(icon, color: iconColor),
+      leading: Icon(icon, color: Colors.green),
       title: Text(title, style: GoogleFonts.poppins(color: textColor)),
       trailing: trailing ??
           const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),

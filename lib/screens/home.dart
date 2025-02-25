@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:wasteless/screens/events.dart';
+import 'package:wasteless/screens/maps.dart';
+import 'package:wasteless/screens/recycle.dart';
 
 import 'package:wasteless/screens/register.dart';
 
@@ -25,13 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> pages = [
       HomeScreen(),
       // Replace with actual MapScreen(),
-      RegisterScreen(),
+      CleanUpMapScreen(),
       // Replace with actual RecyclingScreen(),
-      Container(color: Colors.green),
+      RecycleFormPage(),
       // Replace with actual EventsScreen(),
-      Container(color: Colors.red),
+      EventsPage(),
       // Replace with actual AccountScreen(),
-      Container(color: Colors.orange),
+      ProfileScreen(),
     ];
 
     Navigator.pushReplacement(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:wasteless/components/button.dart';
 
 class RecycleFormPage extends StatefulWidget {
   const RecycleFormPage({super.key});
@@ -54,7 +55,7 @@ class _RecycleFormPageState extends State<RecycleFormPage> {
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',
-                      fontSize: 35)),
+                      fontSize: 36)),
               SizedBox(height: 16),
               Text("Ariana Wasteless Center",
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -135,7 +136,8 @@ class _RecycleFormPageState extends State<RecycleFormPage> {
               SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {},
-                child: Text("Upload Waste Pictures"),
+                child: Text("Upload Waste Pictures",
+                    style: TextStyle(color: Colors.green)),
               ),
               SizedBox(height: 16),
               CheckboxListTile(
@@ -148,8 +150,8 @@ class _RecycleFormPageState extends State<RecycleFormPage> {
                 },
               ),
               SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              CustomButton(
+                text: "Send",
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _agree) {
                     // Handle form submission
@@ -157,8 +159,7 @@ class _RecycleFormPageState extends State<RecycleFormPage> {
                         content: Text("Form submitted successfully!")));
                   }
                 },
-                child: Text("Send", style: TextStyle(color: Colors.white)),
-              ),
+              )
             ],
           ),
         ),
