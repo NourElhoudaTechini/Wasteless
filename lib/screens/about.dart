@@ -26,7 +26,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
+              MaterialPageRoute(builder: (context) => AccountScreen()),
             );
           },
         ),
@@ -71,7 +71,15 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
               // Save Settings Button
               SizedBox(
                 width: double.infinity,
-                child: CustomButton(text: "Save Settings", onPressed: () {}),
+                child: CustomButton(
+                    text: "Save Settings",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountScreen()),
+                      );
+                    }),
               ),
             ],
           ),
@@ -94,7 +102,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
   // Function to create text input fields
   Widget _buildTextField(IconData icon, String hintText) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 16),
       child: TextField(
         decoration: InputDecoration(
           filled: true,
@@ -114,7 +122,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
   Widget _buildPasswordField(
       String hintText, bool obscure, VoidCallback toggleVisibility) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 16),
       child: TextField(
         obscureText: obscure,
         decoration: InputDecoration(

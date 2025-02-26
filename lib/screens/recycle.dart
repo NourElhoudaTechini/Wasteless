@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wasteless/components/button.dart';
+import 'package:wasteless/screens/home.dart';
 
 class RecycleFormPage extends StatefulWidget {
   const RecycleFormPage({super.key});
@@ -155,8 +156,15 @@ class _RecycleFormPageState extends State<RecycleFormPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _agree) {
                     // Handle form submission
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Form submitted successfully!")));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Form submitted successfully!"),
+                      ),
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
                   }
                 },
               )

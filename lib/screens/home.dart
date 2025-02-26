@@ -2,11 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:wasteless/screens/about.dart';
 import 'package:wasteless/screens/events.dart';
 import 'package:wasteless/screens/maps.dart';
+import 'package:wasteless/screens/ranking.dart';
 import 'package:wasteless/screens/recycle.dart';
-
-import 'package:wasteless/screens/register.dart';
+import 'package:wasteless/screens/account.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,10 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
       // Replace with actual EventsScreen(),
       EventsPage(),
       // Replace with actual AccountScreen(),
-      ProfileScreen(),
+      AccountScreen(),
     ];
-
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => pages[index]),
     );
@@ -190,35 +190,65 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildActionCard(IconData icon, String title, Color color) {
-    return Container(
-      width: 150,
-      height: 150,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 40, color: color),
-          SizedBox(height: 10),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
+    return GestureDetector(
+      onTap: () {
+        if (title == "Recycle") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RecycleFormPage()),
+          );
+        } else if (title == "Clean\nNeighborhood") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CleanUpMapScreen()),
+          );
+        } else if (title == "Events") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EventsPage()),
+          );
+        } else if (title == "Ranking") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RankingPage()),
+          );
+        } else if (title == "Object Detection") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EventsPage()),
+          );
+        }
+      },
+      child: Container(
+        width: 150,
+        height: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 5,
+              offset: Offset(0, 3),
             ),
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 40, color: color),
+            SizedBox(height: 10),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

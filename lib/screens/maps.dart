@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wasteless/screens/home.dart';
 
 class CleanUpMapScreen extends StatefulWidget {
   const CleanUpMapScreen({super.key});
@@ -10,17 +12,16 @@ class CleanUpMapScreen extends StatefulWidget {
 }
 
 class _CleanUpMapScreenState extends State<CleanUpMapScreen> {
-  GoogleMapController? mapController;
+  final LatLng dirtyPlace = LatLng(36.8008, 10.1844);
 
   void _openGoogleMaps() async {
     final String googleUrl =
-        "https://www.google.com/maps/dir/?api=1&destination=36.8008,10.1844";
+        "https://www.google.com/maps/dir/?api=1&destination=${dirtyPlace.latitude},${dirtyPlace.longitude}";
 
     if (await canLaunchUrl(Uri.parse(googleUrl))) {
       await launchUrl(Uri.parse(googleUrl),
           mode: LaunchMode.externalApplication);
     } else {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Could not open Google Maps.')),
       );
@@ -36,7 +37,10 @@ class _CleanUpMapScreenState extends State<CleanUpMapScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
           },
         ),
         title: const Text(
@@ -50,26 +54,29 @@ class _CleanUpMapScreenState extends State<CleanUpMapScreen> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(36.8008, 10.1844),
-              zoom: 15,
+          FlutterMap(
+            options: MapOptions(
+              initialCenter: dirtyPlace,
+              initialZoom: 15,
             ),
-            onMapCreated: (GoogleMapController controller) {
-              setState(() {
-                mapController = controller;
-              });
-            },
-            markers: {
-              const Marker(
-                markerId: MarkerId('1'),
-                position: LatLng(36.8008, 10.1844),
-                infoWindow: InfoWindow(
-                  title: 'Dirty Place',
-                  snippet: 'This place is dirty',
-                ),
+            children: [
+              TileLayer(
+                urlTemplate:
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                subdomains: ['a', 'b', 'c'],
               ),
-            },
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    point: dirtyPlace,
+                    width: 40,
+                    height: 40,
+                    child: const Icon(Icons.location_pin,
+                        color: Colors.red, size: 40),
+                  ),
+                ],
+              ),
+            ],
           ),
           Positioned(
             top: 80,

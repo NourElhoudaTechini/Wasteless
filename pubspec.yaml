@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   google_maps_flutter: ^2.5.0
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
   url_launcher: ^6.1.14
   google_fonts: ^6.1.0
 
@@ -72,6 +74,10 @@ flutter:
     - assets/Event1.png
     - assets/Event2.png
     - assets/me.jpeg
+    - assets/ech.png
+    - assets/ech2.png
+    - assets/ech3.png
+    - assets/ech1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

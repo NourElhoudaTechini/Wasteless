@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wasteless/screens/about.dart';
+import 'package:wasteless/screens/exchange.dart';
+import 'package:wasteless/screens/welcome.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100, // Light green background
+      backgroundColor: Colors.grey.shade100, // Light grey background
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
               Container(
                 height: 80,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
               ),
@@ -24,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     height: 60,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                   ),
@@ -33,10 +36,10 @@ class ProfileScreen extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       const CircleAvatar(
-                          radius: 60,
-                          backgroundImage: AssetImage(
-                              "assets/me.jpeg") // Replace with actual image
-                          ),
+                        radius: 60,
+                        backgroundImage: AssetImage(
+                            "assets/me.jpeg"), // Replace with actual image
+                      ),
                       Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
@@ -67,59 +70,89 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Wasteless Points
-              Text(
-                '💲 320 Wasteless Points',
-                style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/money.png", width: 20),
+                  const SizedBox(width: 4),
+                  Text(
+                    ' 320 Wasteless Points',
+                    style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 30),
 
               // Settings Section
               _buildSectionTitle("Settings"),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: SizedBox(
-                  child: Column(
-                    children: [
-                      _buildListTile(Icons.person_outline, "About me"),
-                      _buildListTile(Icons.favorite_border, "My Favorites"),
-                      _buildListTile(Icons.location_on_outlined, "My Address"),
-                      _buildListTile(
-                          Icons.sync_alt, "Exchange Wasteless Points"),
-                      _buildListTile(Icons.notifications_none, "Notifications"),
-                    ],
-                  ),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Column(
+                  children: [
+                    _buildListTile(
+                      Icons.person_outline,
+                      "About me",
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutMeScreen()),
+                        );
+                      },
+                    ),
+                    _buildListTile(
+                        Icons.favorite_border, "My Favorites", () {}),
+                    _buildListTile(
+                        Icons.location_on_outlined, "My Address", () {}),
+                    _buildListTile(Icons.sync_alt, "Exchange Wasteless Points",
+                        () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ExchangePage()),
+                      );
+                    }),
+                    _buildListTile(
+                        Icons.notifications_none, "Notifications", () {}),
+                  ],
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Other Section
               _buildSectionTitle("Other"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(color: Colors.white),
                 child: Column(
                   children: [
-                    _buildListTile(Icons.info_outline, "Version",
-                        trailing: const Text("1.0.0",
-                            style: TextStyle(color: Colors.grey))),
-                    _buildListTile(Icons.star_border, "Rate us"),
+                    _buildListTile(
+                      Icons.info_outline,
+                      "Version",
+                      () {},
+                      trailing: const Text("1.0.0",
+                          style: TextStyle(color: Colors.grey)),
+                    ),
+                    _buildListTile(Icons.star_border, "Rate us", () {}),
                     ListTile(
-                      leading: Icon(Icons.logout, color: Colors.red),
+                      leading: const Icon(Icons.logout, color: Colors.red),
                       title: Text("Sign out",
                           style: GoogleFonts.poppins(color: Colors.red)),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WelcomeScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -144,16 +177,14 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // Function to create list items
-  Widget _buildListTile(IconData icon, String title,
-      {Widget? trailing,
-      Color iconColor = Colors.black,
-      Color textColor = Colors.black}) {
+  Widget _buildListTile(IconData icon, String title, VoidCallback onTap,
+      {Widget? trailing, Color textColor = Colors.black}) {
     return ListTile(
       leading: Icon(icon, color: Colors.green),
       title: Text(title, style: GoogleFonts.poppins(color: textColor)),
       trailing: trailing ??
           const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-      onTap: () {}, // Add navigation function here
+      onTap: onTap, // Fixed missing function
     );
   }
 }

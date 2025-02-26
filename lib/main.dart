@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/screens/about.dart';
-import 'package:wasteless/screens/account.dart';
+import 'package:wasteless/screens/exchange.dart';
+import 'package:wasteless/screens/exchangedetail.dart';
+
+import 'package:wasteless/screens/home.dart';
+import 'package:wasteless/screens/maps.dart';
+import 'package:wasteless/screens/ranking.dart';
+import 'package:wasteless/screens/welcome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +26,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
           useMaterial3: true,
         ),
-        home: AboutMeScreen());
+        home: RankingPage());
   }
 }

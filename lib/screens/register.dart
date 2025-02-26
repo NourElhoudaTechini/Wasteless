@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/components/button.dart';
+import 'package:wasteless/screens/home.dart';
 import 'package:wasteless/screens/welcome.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -100,7 +101,14 @@ class RegisterScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            CustomButton(text: 'Sign Up', onPressed: () {}),
+            CustomButton(
+                text: 'Sign Up',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                }),
           ],
         ),
       ),
