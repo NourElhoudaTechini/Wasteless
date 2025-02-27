@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:wasteless/screens/about.dart';
+
 import 'package:wasteless/screens/events.dart';
 import 'package:wasteless/screens/maps.dart';
 import 'package:wasteless/screens/ranking.dart';

@@ -1,10 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wasteless/components/button.dart';
 import 'package:wasteless/screens/home.dart';
 import 'package:wasteless/screens/welcome.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _signUp() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // Navigate to HomeScreen on successful sign-up
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: ${e.toString()}")),
+      );
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +57,7 @@ class RegisterScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.green),
+                icon: const Icon(Icons.arrow_back, color: Colors.green),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -27,10 +66,10 @@ class RegisterScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 60),
-            Image(image: AssetImage('assets/logo_vert.png')),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 60),
+            const Image(image: AssetImage('assets/logo_vert.png')),
+            const SizedBox(height: 20),
+            const Text(
               'Create Your Account',
               style: TextStyle(
                 fontSize: 24,
@@ -38,77 +77,52 @@ class RegisterScreen extends StatelessWidget {
                 color: Colors.green,
               ),
             ),
-            SizedBox(height: 60),
-            ElevatedButton.icon(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                minimumSize: Size(double.infinity, 50),
-              ),
-              icon: Icon(Icons.facebook, color: Colors.white),
-              label: Text('Sign up with FACEBOOK',
-                  style: TextStyle(color: Colors.white)),
-            ),
-            SizedBox(height: 10),
-            OutlinedButton.icon(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-              ),
-              icon: Image.asset('assets/google_logo.png', height: 15),
-              label:
-                  Text('Sign Up GOOGLE', style: TextStyle(color: Colors.black)),
-            ),
-            SizedBox(height: 40),
-            Text('or SIGN UP WITH EMAIL', style: TextStyle(color: Colors.grey)),
-            SizedBox(height: 20),
+            const SizedBox(height: 60),
             TextField(
-              decoration: InputDecoration(
+              controller: _fullNameController,
+              decoration: const InputDecoration(
                 labelText: 'Full Name',
-                suffixIcon: Icon(Icons.check, color: Colors.green),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
-              decoration: InputDecoration(
+              controller: _emailController,
+              decoration: const InputDecoration(
                 labelText: 'Email Address',
-                suffixIcon: Icon(Icons.check, color: Colors.green),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
+              controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
-                suffixIcon: Icon(Icons.remove_red_eye),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Checkbox(value: true, onChanged: (value) {}),
-                Text('I have read the '),
+                const Text('I have read the '),
                 GestureDetector(
                   onTap: () {},
-                  child: Text(
+                  child: const Text(
                     'privacy policy.',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 40),
-            CustomButton(
-                text: 'Sign Up',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
-                }),
+            const SizedBox(height: 40),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    text: 'Sign Up',
+                    onPressed: _signUp,
+                  ),
           ],
         ),
       ),
