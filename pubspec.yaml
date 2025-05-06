@@ -34,6 +34,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  intl: ^0.20.2
+  flutter_map: ^8.1.1
+  url_launcher: ^6.3.1
+  latlong2: ^0.9.1
+  google_fonts: ^6.2.1
+  image_picker: ^1.1.2
+  lucide_icons: ^0.257.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +68,16 @@ flutter:
     - assets/logo.png
     - assets/logo_vert.png
     - assets/google_logo.png
+    - assets/forest.png
+    - assets/money.png
+    - assets/Event1.png
+    - assets/Event2.png
+    - assets/me.jpeg
+    - assets/ech.png
+    - assets/ech2.png
+    - assets/ech3.png
+    - assets/ech1.png
+    - assets/background.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -74,6 +91,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/Poppins/Poppins-Regular.ttf
+        - asset: assets/Poppins/Poppins-Bold.ttf
+        - asset: assets/Poppins/Poppins-Medium.ttf
+        - asset: assets/Poppins/Poppins-SemiBold.ttf
+        - asset: assets/Poppins/Poppins-Light.ttf
+        - asset: assets/Poppins/Poppins-ExtraLight.ttf
+        - asset: assets/Poppins/Poppins-Thin.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

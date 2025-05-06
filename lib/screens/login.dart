@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/screens/home.dart';
 import 'package:wasteless/screens/register.dart';
 import 'package:wasteless/screens/welcome.dart';
 
@@ -77,7 +78,12 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 minimumSize: Size(double.infinity, 50),
